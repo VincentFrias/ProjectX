@@ -1,0 +1,1 @@
+package xadrez.pieces;
