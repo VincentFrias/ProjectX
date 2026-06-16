@@ -12,7 +12,7 @@ import xadrez.pieces.Piece;
 // canMoveTo() que orquestra as demais, e será apenas a necessária.
 public class check_move {
 
-    // piece    : a peça que está tentando se mover
+    // piece    : a peça que está tentando se mover 
     // board    : matriz 8x8 do tabuleiro; null = casa vazia
     // startSet : posição atual {linha, coluna}
     // finalSet : posição destino {linha, coluna}

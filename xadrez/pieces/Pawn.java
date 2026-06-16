@@ -5,10 +5,12 @@ public class Pawn extends Piece {
         // movement_loop = false porque o peão tem alcance fixo (não desliza).
         super(isWhite, false);
 
-        // dir define a direção do avanço:
-        //   branco anda "pra frente" (linha +1)
-        //   preto anda "pra trás" (linha -1)
-        int dir = isWhite ? 1 : -1;
+        
+        //Matheus - 03/06/2026
+        
+        // branco começa na linha 6 da matriz e vai para a linha 0 (linha diminui, logo -1)
+        // branco começa na linha1 da matriz e vai para a linha 7 (linha aumenta, logo +1)
+        int dir = isWhite ? -1 : 1;
 
         // Avanço normal: 1 casa pra frente, mesma coluna. Só vale se destino vazio.
         baseMovements.add(new Movement(1 * dir, 0, MoveType.MOVE_ONLY));
