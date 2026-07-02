@@ -12,6 +12,7 @@ Implementação Inicial (até 22/05):
 	[X] validador de movimento (check_move): geometria + cor + MoveType + caminho livre
 
 - inteface gráfica:
+	[x] representação no terminal do tabuleiro
 	[] representação gráfica do tabuleiro
 
 Implementações Intermediárias ( 23/05 até 29/05):
