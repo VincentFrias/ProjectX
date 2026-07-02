@@ -3,7 +3,7 @@ package xadrez.pieces;
 public class Knight extends Piece{
     public Knight(boolean isWhite) {
         // movement_loop = false porque o cavalo tem alcance fixo (salto em L).
-        // canJump      = true  porque o cavalo pula peças no caminho.
+        // canJump = true porque o cavalo pula peças no caminho.
         super(isWhite, false, true);
 
         // 8 saltos em L: combina dx, dy em {-2..+2} e aceita só os pares

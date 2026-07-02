@@ -87,11 +87,24 @@ public class Board {
 
     // Função usada unicamente para teste de visualização do tabuleiro no terminal, 
     // depois vai ser substituída por uma interface gráfica
+    //1 representa as peças brancas
+    //2 representa as peças pretas
     public void printBoard(boolean flip) {
     for (int i=0; i<8; i++) {
         System.out.print((8 - i) + " | ");
         for (int j=0; j<8; j++) {
-            System.out.print((board[i][j] == null) ? "0 " : "1 ");
+            if(board[i][j] == null) {
+                System.out.print("0 ");
+            } else {
+                if(board[i][j].isWhite()) {
+
+                    System.out.print("1 ");
+                }
+                else {
+                    System.out.print("2 ");
+                }
+            }
+            
         }
         System.out.println("|"); 
     }
