@@ -1,14 +1,12 @@
 package xadrez;
 import xadrez.pieces.*;
 
-    // Matheus - 03/06/2026 
-    // Fiz diversas alterações, adicionando praticamente todas as funções, que 
-    // acredito ser necessário por hora
-
+// Board é apenas o ESTADO do tabuleiro: a matriz 8x8 e o acesso a ela.
+// As regras do jogo (roque, xeque, xeque-mate, legalidade) ficam em GameRules;
+// a exibição no terminal fica em BoardPrinter.
 public class Board {
     private Piece[][] board = new Piece[8][8];
-    private check_move checkMove = new check_move();
-    
+
     public void fillBoard() {
         // Peças pretas (linhas 0 e 1 da matriz)
         board[0][0] = new Rook(false);
@@ -61,53 +59,8 @@ public class Board {
         }
     }
 
-    // Tenta mover a peça da posição [l1][c1] para a posição [l2][c2]. 
-    // Retorna true se o movimento for bem-sucedido, false caso contrário.
-    public boolean movePiece(int l1, int c1, int l2, int c2, boolean whiteTurn) {
-        // Verifica se as posições são válidas e se há uma peça na posição de origem
-        if(ValidPosition(l1, c1) && ValidPosition(l2, c2) && board[l1][c1] != null) {
-            Piece piece = board[l1][c1];
-            
-            // Verifica se a peça pertence ao jogador que está tentando mover
-            if (piece.isWhite() != whiteTurn) {
-                return false;
-            }
-            
-            // Verifica se o movimento é válido para a peça
-            if (checkMove.canMoveTo(piece, board, new int[]{l1, c1}, new int[]{l2, c2})) {
-                board[l2][c2] = piece;
-                board[l1][c1] = null;
-                piece.setMoved(); 
-                return true; 
-            }
-        }
-        // Se qualquer verificação falhar, o movimento é inválido
-        return false; 
-    }
-
-    // Função usada unicamente para teste de visualização do tabuleiro no terminal, 
-    // depois vai ser substituída por uma interface gráfica
-    //1 representa as peças brancas
-    //2 representa as peças pretas
-    public void printBoard(boolean flip) {
-    for (int i=0; i<8; i++) {
-        System.out.print((8 - i) + " | ");
-        for (int j=0; j<8; j++) {
-            if(board[i][j] == null) {
-                System.out.print("0 ");
-            } else {
-                if(board[i][j].isWhite()) {
-
-                    System.out.print("1 ");
-                }
-                else {
-                    System.out.print("2 ");
-                }
-            }
-            
-        }
-        System.out.println("|"); 
-    }
-    System.out.println("    a b c d e f g h"); 
+    // Acesso direto à matriz.
+    Piece[][] getBoard() {
+        return board;
     }
 }

@@ -14,16 +14,32 @@ public class Main {
         Board board = new Board();
         Scanner sc = new Scanner(System.in);
         board.fillBoard();
-        
+        GameRules rules = new GameRules(board);   // motor de regras (xeque, mate, roque, legalidade)
+        BoardPrinter printer = new BoardPrinter(); // exibição no terminal
+
         boolean running = true;
         boolean WhiteTurn = true;
 
 		// Loop principal do jogo: exibe o tabuleiro, solicita o movimento do usuário, valida e executa 
 		// o movimento, e alterna o turno.
         while(running) {
-            board.printBoard(WhiteTurn);
+            printer.printBoard(board, WhiteTurn);
+
+            // Fim de jogo: o jogador da vez não consegue escapar do xeque.
+            if (rules.isCheckmate(WhiteTurn)) {
+                System.out.println((WhiteTurn ? "BRANCAS" : "PRETAS") + " EM XEQUE-MATE. \nFIM DE JOGO.");
+                break;
+            }
+            // Empate por afogamento: sem xeque, mas sem nenhuma jogada legal.
+            if (rules.isStalemate(WhiteTurn)) {
+                System.out.println("AFOGAMENTO. EMPATE.\n");
+                break;
+            }
+
             System.out.println((WhiteTurn) ? "BRANCAS JOGAM" : "PRETAS JOGAM");
-            System.out.println("DIGITE O MOVIMENTO (EX: e2 e4, d2 d4) ");
+            // Alerta de xeque colado no prompt do movimento.
+            String prefixoXeque = rules.isInCheck(WhiteTurn) ? "EM XEQUE: " : "";
+            System.out.println(prefixoXeque + "DIGITE O MOVIMENTO (EX: e2 e4, d2 d4) ");
             String move = sc.nextLine();
 			// Divide a entrada em partes e converte as coordenadas do formato "e2" para índices de matriz.
             String[] parts = move.split(" ");
@@ -45,7 +61,7 @@ public class Main {
 			// Verifica se as posições são válidas e tenta realizar o movimento
 			// Se o movimento for bem-sucedido, inverte o turno. Caso contrário, exibe uma mensagem de erro.
             if(board.ValidPosition(l1, c1) && board.ValidPosition(l2, c2)) {
-                if (board.movePiece(l1, c1, l2, c2, WhiteTurn)) { // Aciona a jogada avaliando o retorno
+                if (rules.movePiece(l1, c1, l2, c2, WhiteTurn)) { // Aciona a jogada avaliando o retorno
                     // Só inverte o turno se movePiece retornar true
 					WhiteTurn = !WhiteTurn; 
                 } else { 
