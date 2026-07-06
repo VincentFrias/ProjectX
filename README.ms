@@ -19,8 +19,8 @@ Implementação Inicial (até 22/05):
     [] jogabilidade do xadrez
     [X]revezamento entre players
 
-    [] mecanismos do ROOK
-    [] mecanismos do CHEQ
+    [X] mecanismos do ROOK
+    [X] mecanismos do CHEQ
 
 
 
