@@ -12,20 +12,15 @@ Implementação Inicial (até 22/05):
 	[X] validador de movimento (check_move): geometria + cor + MoveType + caminho livre
 
 - inteface gráfica:
-	[x] representação no terminal do tabuleiro
+	[X] representação no terminal do tabuleiro
 	[] representação gráfica do tabuleiro
 
-Implementações Intermediárias ( 23/05 até 29/05):
 
-- a ser definido as tarefas a serem implementadas
- espera-se ser implementado a jogabilidade do xadrez
- espera-se ser implementado o revezamento entre players
+    [] jogabilidade do xadrez
+    [X]revezamento entre players
 
-Implementações Finais ( 30/05 até 05/06):
-
-- a ser definido as tarefas a serem implementadas
- espera-se ser implementado os mecanismos do ROOK
- espera-se ser implementado os mecanismos do CHEQ
+    [] mecanismos do ROOK
+    [] mecanismos do CHEQ
 
 
 
