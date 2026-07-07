@@ -7,13 +7,20 @@ public class Knight extends Piece{
         super(isWhite, false, true);
 
         // 8 saltos em L: combina dx, dy em {-2..+2} e aceita só os pares
-        // onde |dx| + |dy| == 3 (forçando um eixo = 1 e o outro = 2).
-        for (int dx = -2; dx <= 2; dx++) {
-            for (int dy = -2; dy <= 2; dy++) {
-                if (Math.abs(dx) + Math.abs(dy) == 3) {
-                    baseMovements.add(new Movement(dx, dy));
-                }
-            }
+        int[][] moves = {
+            {-2, -1}, {-2, 1},
+            {-1, -2}, {-1, 2},
+            { 1, -2}, { 1, 2},
+            { 2, -1}, { 2, 1}
+        };
+        // Adiciona os movimentos válidos à lista de movimentos base.
+
+        for (int[] move : moves) {
+            baseMovements.add(new Movement(move[0], move[1]));
         }
+    }
+    @Override
+    public String toString() { 
+        return "c"; 
     }
 }

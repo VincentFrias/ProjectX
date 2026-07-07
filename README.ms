@@ -1,6 +1,6 @@
 Trabalho da disciplina de Programação Orientada a Objetos ministrada pelo professor doutor Guilherme Freire...
 
-Implementação Inicial (até 22/05):
+Implementação Inicial:
 
 - movimentações:
 	[X] movimentação básica peão
@@ -12,15 +12,31 @@ Implementação Inicial (até 22/05):
 	[X] validador de movimento (check_move): geometria + cor + MoveType + caminho livre
 
 - inteface gráfica:
-	[X] representação no terminal do tabuleiro
+	[x] representação no terminal do tabuleiro
+		[x] command line linterface
 	[] representação gráfica do tabuleiro
+		[] desenhar modelo peças
+		[] implementação tabuleiro
+		[] implementação peças
+		[] implementação movimentações
+		
 
+- correção de bugs:
+	[x] movimentação cavalo
+	
 
-    [] jogabilidade do xadrez
-    [X]revezamento entre players
+Implementações Intermediárias:
 
-    [X] mecanismos do ROOK
-    [X] mecanismos do CHEQ
+- a ser definido as tarefas a serem implementadas
+ [x] espera-se ser implementado a jogabilidade do xadrez
+ [x] espera-se ser implementado o revezamento entre players
+
+Implementações Finais:
+
+- a ser definido as tarefas a serem implementadas
+ [x] espera-se ser implementado os mecanismos do ROOK
+ [x] espera-se ser implementado os mecanismos do CHEQ
+ [x] espera-se ser implementado os mecanismos de AN PASSANT
 
 
 

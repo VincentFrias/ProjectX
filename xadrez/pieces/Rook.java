@@ -13,4 +13,8 @@ public class Rook extends Piece {
             if (dy != 0) baseMovements.add(new Movement(0, dy));
         }
     }
+    @Override
+    public String toString() { 
+        return "r"; 
+    }
 }

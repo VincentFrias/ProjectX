@@ -23,5 +23,8 @@ public class Pawn extends Piece {
         // e (como todo avanço) só se destino vazio.
         specialMovements.add(new Movement(2 * dir, 0, MoveType.MOVE_ONLY));
     }
-
+    @Override
+    public String toString() { 
+        return "p"; 
+    }
 }
