@@ -2,8 +2,8 @@ package xadrez;
 import xadrez.pieces.Piece;
 
 // Exibição do tabuleiro no terminal.
-//1 representa as peças brancas
-//2 representa as peças pretas
+//VERDE representa as peças brancas
+//VERMELHO representa as peças pretas
 public class BoardPrinter {
     public void printBoard(Board board, boolean flip) {
         String RED = "\u001B[31m";

@@ -1,12 +1,6 @@
 package xadrez;
+import xadrez.pieces.*;
 import java.util.Scanner;
-
-// Matheus - 03/06/2026
-// Fiz diversas alterações, principalmente na função Main, para criar um loop de jogo, ler os 
-// movimentos do usuário e acionar as funções de movimento do tabuleiro. 
-// Também adicionei diversas funções no Board, como printBoard, getPiece, setPiece, ValidPosition 
-// e movePiece, para facilitar a implementação do jogo. 
-
 
 public class Main {
 
@@ -61,11 +55,18 @@ public class Main {
 			// Verifica se as posições são válidas e tenta realizar o movimento
 			// Se o movimento for bem-sucedido, inverte o turno. Caso contrário, exibe uma mensagem de erro.
             if(board.ValidPosition(l1, c1) && board.ValidPosition(l2, c2)) {
-                if (rules.movePiece(l1, c1, l2, c2, WhiteTurn)) { // Aciona a jogada avaliando o retorno
-                    // Só inverte o turno se movePiece retornar true
-					WhiteTurn = !WhiteTurn; 
-                } else { 
-					// Se movePiece retornar false, significa que o movimento foi ilegal ou a peça selecionada não pertence ao jogador atual
+                String promotionChoice = null;
+                // Verifica se a peça movida é um peão que alcançou a linha de promoção. 
+                // Se sim, solicita ao usuário a escolha da peça para promoção.
+                Piece moved = board.getPiece(l1, c1);
+                if(moved instanceof Pawn && ((WhiteTurn && l2 == 0) || (!WhiteTurn && l2 == 7))) {
+                    System.out.println("PROMOÇÃO DE PEÇA:\n Escolha: \n Q - Rainha\n r - Torre\n b - Bispo\n c - Cavalo");
+                    promotionChoice = sc.nextLine().trim(); //trim remove espaços em branco extras do início e do fim da string
+                }
+                // Tenta mover a peça e, se for bem-sucedido, inverte o turno.
+                if(rules.movePiece(l1, c1, l2, c2, WhiteTurn, promotionChoice)) {
+                    WhiteTurn = !WhiteTurn; // Inverte o turno após a promoção
+                } else {
                     System.out.println("\nMOVIMENTO ILEGAL OU PEÇA INCORRETA. TENTE NOVAMENTE.");
                 }
             } else {
@@ -73,7 +74,9 @@ public class Main {
                 System.out.println("\nPOSIÇÃO INVÁLIDA. TENTE NOVAMENTE.");
             }   
         }
-		// O loop só termina se a variável "running" for definida como false, o que pode ser implementado 
+        
+		
+        // O loop só termina se a variável "running" for definida como false, o que pode ser implementado 
 		// futuramente para condições de vitória ou empate.
         sc.close();
     }

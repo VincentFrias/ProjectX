@@ -11,8 +11,13 @@ public class GameRules {
     }
 
     // Tenta mover a peça da posição [l1][c1] para a posição [l2][c2].
-    // Retorna true se o movimento for bem-sucedido, false caso contrário.
     public boolean movePiece(int l1, int c1, int l2, int c2, boolean whiteTurn) {
+        return movePiece(l1, c1, l2, c2, whiteTurn, null);
+    }
+
+    // Tenta mover a peça da posição [l1][c1] para a posição [l2][c2].
+    // Retorna true se o movimento for bem-sucedido, false caso contrário.
+    public boolean movePiece(int l1, int c1, int l2, int c2, boolean whiteTurn, String promotionChoice) {
         Piece[][] grid = board.getBoard();
         // Verifica se as posições são válidas e se há uma peça na posição de origem
         if(board.ValidPosition(l1, c1) && board.ValidPosition(l2, c2) && grid[l1][c1] != null) {
@@ -37,6 +42,15 @@ public class GameRules {
                 grid[l2][c2] = piece;
                 grid[l1][c1] = null;
                 piece.setMoved();
+
+                // Se a peça movida for um peão e alcançar a linha de promoção, realiza a promoção
+                if (piece instanceof Pawn) {
+                    Pawn pawn = (Pawn) piece;
+                    if (pawn.canPromote(l2)) {
+                        String type = (promotionChoice != null) ? promotionChoice : "q";
+                        grid[l2][c2] = pawn.promoteTo(type);
+                    }
+                }
                 return true;
             }
         }
