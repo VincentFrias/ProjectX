@@ -15,7 +15,10 @@ public class Queen extends Piece {
         }
     }
     @Override
-    public String toString() { 
-        return "Q"; 
+    public String toString() {
+        return "Q";
     }
+
+    @Override
+    public char fenLetter() { return 'q'; }
 }

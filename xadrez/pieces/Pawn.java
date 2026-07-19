@@ -38,7 +38,10 @@ public class Pawn extends Piece {
     }
 
     @Override
-    public String toString() { 
-        return "p"; 
+    public String toString() {
+        return "p";
     }
+
+    @Override
+    public char fenLetter() { return 'p'; }
 }

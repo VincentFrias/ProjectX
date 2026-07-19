@@ -25,4 +25,13 @@ public class BoardPrinter {
         }
         System.out.println("    a b c d e f g h");
     }
+
+    // Limpa a tela e devolve o cursor ao topo, para o tabuleiro ser redesenhado
+    // sempre no mesmo lugar em vez de rolar. Não apaga o histórico do terminal
+    // (\033[3J faria isso) — assim ainda dá para rolar para cima e rever a partida.
+    // Depende de o terminal entender ANSI, o mesmo pressuposto que as cores já fazem.
+    public void clear() {
+        System.out.print("[H[2J");
+        System.out.flush();   // sem newline o texto ficaria preso no buffer
+    }
 }

@@ -14,7 +14,10 @@ public class Rook extends Piece {
         }
     }
     @Override
-    public String toString() { 
-        return "r"; 
+    public String toString() {
+        return "r";
     }
+
+    @Override
+    public char fenLetter() { return 'r'; }
 }

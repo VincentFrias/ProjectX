@@ -28,14 +28,19 @@ public abstract class Piece {
 	public boolean isMoved() { return moved; }		// Getter: a peça já se mexeu pelo menos uma vez?
 	public void setMoved() { this.moved = true; }	// Marca a peça como já tendo se movido.
 
-	// Getter de cor — usado pelo check_move pra distinguir aliada x inimiga no destino.
+	// Getter de cor — usado pelo moveValidator pra distinguir aliada x inimiga no destino.
 	public boolean isWhite() { return isWhite; }
 
-	// Getter para o check_move saber se essa peça desliza (rook, bishop, queen)
+	// Getter para o moveValidator saber se essa peça desliza (rook, bishop, queen)
 	public boolean isMovement_loop() { return movement_loop;}
 
-	// Getter para o check_move pular a verificação de obstáculos no caminho
+	// Getter para o moveValidator pular a verificação de obstáculos no caminho
 	public boolean canJump() { return canJump; }
+
+	// Letra da peça na notação FEN, sempre MINÚSCULA — quem serializa aplica
+	// maiúscula para as brancas. Separado do toString(), que serve à exibição
+	// no terminal e pode mudar sem quebrar a comunicação com o motor.
+	public abstract char fenLetter();
 
 	// Devolve a lista completa de movimentos disponíveis NESTE MOMENTO.
 	// Monta uma cópia da base e, se a peça nunca se moveu, agrega os especiais.

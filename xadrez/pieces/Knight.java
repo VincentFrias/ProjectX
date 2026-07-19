@@ -20,7 +20,11 @@ public class Knight extends Piece{
         }
     }
     @Override
-    public String toString() { 
-        return "c"; 
+    public String toString() {
+        return "c";
     }
+
+    // 'n' de knight — o FEN não usa o 'c' de cavalo que o tabuleiro exibe.
+    @Override
+    public char fenLetter() { return 'n'; }
 }

@@ -13,7 +13,10 @@ public class Bishop extends Piece {
         }
     }
     @Override
-    public String toString() { 
-        return "b"; 
+    public String toString() {
+        return "b";
     }
+
+    @Override
+    public char fenLetter() { return 'b'; }
 }

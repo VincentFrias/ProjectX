@@ -10,7 +10,7 @@ import xadrez.pieces.Piece;
 // Não verifica obstáculos no caminho (use pathIsClear) nem xeque.
 // Vicente: deixei as funções como privadas, e a única pública é
 // canMoveTo() que orquestra as demais, e será apenas a necessária.
-public class check_move {
+public class MoveValidator {
 
     // piece    : a peça que está tentando se mover 
     // board    : matriz 8x8 do tabuleiro; null = casa vazia

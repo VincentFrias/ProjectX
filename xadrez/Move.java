@@ -50,10 +50,12 @@ public record Move(int fromRow, int fromCol, int toRow, int toCol, PromotionPiec
     // Mesmo formato que o jogador digita: "e2 e4".
     @Override
     public String toString() {
-        return square(fromRow, fromCol) + " " + square(toRow, toCol);
+        return squareName(fromRow, fromCol) + " " + squareName(toRow, toCol);
     }
 
-    private static String square(int row, int col) {
+    // "linha 6, coluna 4" -> "e2". Público porque o FEN precisa da mesma conversão,
+    // e essa notação deve morar num lugar só.
+    public static String squareName(int row, int col) {
         return "" + (char) ('a' + col) + (char) ('8' - row);
     }
 

@@ -15,7 +15,10 @@ public class King extends Piece{
         }
     }
     @Override
-    public String toString() { 
-        return "K"; 
+    public String toString() {
+        return "K";
     }
+
+    @Override
+    public char fenLetter() { return 'k'; }
 }
