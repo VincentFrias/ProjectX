@@ -1,5 +1,7 @@
 package xadrez;
 import xadrez.pieces.*;
+import java.util.ArrayList;
+import java.util.List;
 
 // Legalidade da jogada, roque, xeque, xeque-mate e afogamento.
 public class GameRules {
@@ -17,7 +19,7 @@ public class GameRules {
 
     // Tenta mover a peça da posição [l1][c1] para a posição [l2][c2].
     // Retorna true se o movimento for bem-sucedido, false caso contrário.
-    public boolean movePiece(int l1, int c1, int l2, int c2, boolean whiteTurn, String promotionChoice) {
+    public boolean movePiece(int l1, int c1, int l2, int c2, boolean whiteTurn, PromotionPiece promotionChoice) {
         Piece[][] grid = board.getBoard();
         // Verifica se as posições são válidas e se há uma peça na posição de origem
         if(board.ValidPosition(l1, c1) && board.ValidPosition(l2, c2) && grid[l1][c1] != null) {
@@ -47,7 +49,7 @@ public class GameRules {
                 if (piece instanceof Pawn) {
                     Pawn pawn = (Pawn) piece;
                     if (pawn.canPromote(l2)) {
-                        String type = (promotionChoice != null) ? promotionChoice : "q";
+                        PromotionPiece type = (promotionChoice != null) ? promotionChoice : PromotionPiece.QUEEN; // fallback para rainha, mas add um loop na main para evitar de ter entradas inválidas
                         grid[l2][c2] = pawn.promoteTo(type);
                     }
                 }
@@ -174,24 +176,44 @@ public class GameRules {
         return emXeque;
     }
 
-    // Força bruta: testa toda peça da cor em todo destino. Basta UMA jogada
-    // que não deixe o rei em xeque para NÃO ser mate/afogamento.
-    private boolean hasAnyLegalMove(boolean cor) {
+    // Todos os lances legais da cor pedida. Força bruta: testa cada peça da cor
+    // contra cada casa do tabuleiro, e descarta o que deixaria o próprio rei em xeque.
+    // NÃO gera roque — ver comentário em movePiece.
+    public List<Move> generateLegalMoves(boolean cor) {
         Piece[][] grid = board.getBoard();
+        List<Move> moves = new ArrayList<>();
+
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 Piece p = grid[i][j];
                 if (p == null || p.isWhite() != cor) continue;
+
                 for (int r = 0; r < 8; r++) {
                     for (int c = 0; c < 8; c++) {
-                        if (checkMove.canMoveTo(p, grid, new int[]{i, j}, new int[]{r, c}) && !moveLeavesKingInCheck(i, j, r, c, cor)) {
-                            return true;
+                        if (checkMove.canMoveTo(p, grid, new int[]{i, j}, new int[]{r, c})
+                                && !moveLeavesKingInCheck(i, j, r, c, cor)) {
+                            moves.add(buildMove(p, i, j, r, c));
                         }
                     }
                 }
             }
         }
-        return false;
+        return moves;
+    }
+
+    // Peão chegando na última linha vira promoção; o resto é lance simples.
+    // Só geramos promoção para dama: subpromoção é legal, mas raríssima, e
+    // multiplicaria a lista por 4 sem ganho prático.
+    private Move buildMove(Piece piece, int fromRow, int fromCol, int toRow, int toCol) {
+        if (piece instanceof Pawn && ((Pawn) piece).canPromote(toRow)) {
+            return new Move(fromRow, fromCol, toRow, toCol, PromotionPiece.QUEEN);
+        }
+        return new Move(fromRow, fromCol, toRow, toCol);
+    }
+
+    // Xeque-mate e afogamento só precisam saber SE existe jogada, não quais.
+    private boolean hasAnyLegalMove(boolean cor) {
+        return !generateLegalMoves(cor).isEmpty();
     }
 
     // Xeque-mate = está em xeque && não tem nenhuma jogada legal para escapar.

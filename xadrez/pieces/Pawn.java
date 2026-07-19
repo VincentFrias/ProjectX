@@ -28,19 +28,13 @@ public class Pawn extends Piece {
         return (isWhite && row == 0) || (!isWhite && row == 7);
     }
 
-    public Piece promoteTo(String pieceType) {
-        switch (pieceType.toLowerCase()) {
-            case "q": //Promoção para Rainha
-                return new Queen(isWhite);
-            case "r": //Promoção para Torre
-                return new Rook(isWhite);
-            case "b": //Promoção para Bispo
-                return new Bishop(isWhite);
-            case "c": //Promoção para Cavalo
-                return new Knight(isWhite);
-            default:
-                throw new IllegalArgumentException("Tipo de peça inválido para promoção: " + pieceType);
-        }
+    public Piece promoteTo(PromotionPiece type) {
+        return switch (type) {
+            case QUEEN  -> new Queen(isWhite);
+            case ROOK   -> new Rook(isWhite);
+            case BISHOP -> new Bishop(isWhite);
+            case KNIGHT -> new Knight(isWhite);
+        };
     }
 
     @Override
