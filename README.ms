@@ -92,6 +92,4 @@ queiram fazer adições complementares.
 
 QUESTÃO:
 
-    -> o STOCKFISH precisa baixar o binario para rodar, senão não funciona, se quiserem eu posso subir uma api no meu server
-    e deixar rodando até o freire testar e liberar as notas... só para evitar dele ter problema quando for testar, e para
-    vcs poderem testar tbm sem ter que ficar baixando o binario do stockfisk
+    -> o STOCKFISH precisa baixar o binario para rodar, senão não funciona, se quiserem eu posso subir uma api no meu server e deixar rodando até o freire testar e liberar as notas... só para evitar dele ter problema quando for testar, e para vcs poderem testar tbm sem ter que ficar baixando o binario do stockfisk
